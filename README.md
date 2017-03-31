@@ -27,17 +27,17 @@
    Selenium Standalone Serverを起動します。  
    なお、各ファイルへのパス(/path/to)は予め適切なものに変更してください。  
 4. bashスクリプトの起動  
-   以上で準備完了です。PowerShellスクリプトを起動しましょう。  
+   以上で準備完了です。bashスクリプトを起動しましょう。  
    1. Google Chromeを起動する場合  
-   `> Emily.bash`  
+   `$ Emily.bash`  
    または  
-   `> Emily.bash chrome`  
+   `$ Emily.bash chrome`  
    2. Internet Explorerを起動する場合  
-   `> Emily.bash ie`  
+   `$ Emily.bash ie`  
    3. Mozilla Firefoxを起動する場合  
-   `> Emily.bash firefox`  
+   `$ Emily.bash firefox`  
    4. Microsoft Edgeを起動する場合  
-   `> Emily.bash edge`  
+   `$ Emily.bash edge`  
 5. 参考文献  
    1. WebDriver  
       Living Document  
