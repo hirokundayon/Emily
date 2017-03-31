@@ -44,12 +44,10 @@
       W3C Editor's Draft 28 April 2016  
       <https://w3c.github.io/webdriver/webdriver-spec.html>  
    2. How To Manually Install Oracle Java on a Debian or Ubuntu VPS   
-      <https://www.digitalocean.com/community/tutorials/how-to-manually-install-oracle-java-on-a-debian-or-ubuntu-vps>
-   3. Bash on WindowsにOracle java8をインストール   
-      <http://qiita.com/pontaa/items/273e9d5200619c6bfdb1>
-   4. Seleniumの薄っすい話4:俺と非公式バインディング  
+      <https://www.digitalocean.com/community/tutorials/how-to-manually-install-oracle-java-on-a-debian-or-ubuntu-vps>  
+   3. Seleniumの薄っすい話4:俺と非公式バインディング  
       <http://qiita.com/hiroshitoda/items/5fa5292ceb1e3e8a9610>  
-   5. bashでWebブラウザ(Selenium WebDriver)を動かした話
+   4. bashでWebブラウザ(Selenium WebDriver)を動かした話
       <https://www.slideshare.net/hirofumitouhei/bashwebselenium-webdriver>  
-   6. OSC2011 Fukuoka 太宰府にて開催！！  
+   5. OSC2011 Fukuoka 太宰府にて開催！！  
       <https://www.ospn.jp/press/20111219osc2011-fukuoka-report.html>  
