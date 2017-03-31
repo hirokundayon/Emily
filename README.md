@@ -1,4 +1,4 @@
-# Selenium WebDriverを動かすPowerShellスクリプトの動かし方
+# Selenium WebDriverを動かすbashスクリプトの動かし方
 <div style="text-align: right;">
 東平洋史
 </div>
