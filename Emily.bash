@@ -24,12 +24,12 @@ SELECTOR='name'
 LOCATOR='q'
 
 ELEMENT_ID=$(findElementByName ${SESSION_ID} q)
-key='OSCFukuoka太宰府\n'
+key='OSC Fukuoka 太宰府\n'
 
 sendKeysToElement ${SESSION_ID} ${ELEMENT_ID} "${key}"
 
 #検索結果が表示されるまで待つ
-TITLE_VALUE='OSCFukuoka太宰府 - Google 検索'
+TITLE_VALUE='OSC Fukuoka 太宰府 - Google 検索'
 waitByTitle "${SESSION_ID}" "${TITLE_VALUE}"
 
 #OSC2011 Fukuoka のレポートを表示させる 
