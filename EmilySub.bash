@@ -97,7 +97,6 @@ function waitByTitle() {
 			      "http://localhost:4444/wd/hub/session/"${SESSION_ID}"/title")
 	TITLE=$(echo ${RESPONSE} | \
 		       sed -e 's/^.*"value":"\([^"]*\)".*$/\1/g')
-        echo $TITLE
     done
 }
 
@@ -260,8 +259,13 @@ function sendKeysToElement() {
     local ELEMENT_ID=$2
     local KEYDATA=$3
 
+    if [ $# -eq 2 ] ; then
+        KEYDATA=" "
+    elif [ $# -gt 3 ] ; then
+        KEYDATA=$(echo $@ | sed -e "s/^${SESSION_ID} ${ELEMENT_ID} //")
+    fi
     local RESPONSE=$(curl --request "POST" \
-			  --data '{"value":["'${KEYDATA}'"]}' \
+			  --data "{\"value\":[\"${KEYDATA}\"]}" \
 			  "http://localhost:4444/wd/hub/session/"${SESSION_ID}"/element/"${ELEMENT_ID}"/value")
 }
 
