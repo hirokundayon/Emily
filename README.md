@@ -17,28 +17,11 @@
     1. Selenium Standalone Serverのダウンロード  
      次のURLから必要なファイルを取得します。   
     <http://www.seleniumhq.org/download/>   
-    + Selenium Standalone Server  
     + Google Chrome Driver  
-    + The Internet Explorer Driver Server  
-    + Mozilla GeckoDriver  
-    + Microsoft Edge Driver  
-
-3. Selenium Standalone Serverの起動  
-   Selenium Standalone Serverを起動します。  
-   なお、各ファイルへのパス(/path/to)は予め適切なものに変更してください。  
-4. bashスクリプトの起動  
+3. bashスクリプトの起動  
    以上で準備完了です。bashスクリプトを起動しましょう。  
-   1. Google Chromeを起動する場合  
    `$ Emily.bash`  
-   または  
-   `$ Emily.bash chrome`  
-   2. Internet Explorerを起動する場合  
-   `$ Emily.bash ie`  
-   3. Mozilla Firefoxを起動する場合  
-   `$ Emily.bash firefox`  
-   4. Microsoft Edgeを起動する場合  
-   `$ Emily.bash edge`  
-5. 参考文献  
+4. 参考文献  
    1. WebDriver  
       Living Document  
       W3C Editor's Draft 28 April 2016  
