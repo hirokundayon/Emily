@@ -1,12 +1,13 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 SCRIPT_DIR=$(cd $(dirname $0);pwd)
 . ${SCRIPT_DIR}/EmilySub.bash
 
-BROWSER=$1
+pkill chromedriver
+chromedriver
 
 #ウィンドウオープン
-SESSION_ID=$(newSession "${BROWSER}")
+SESSION_ID=$(newSession)
 
 #ウィンドウ最大化
 maximizeWindow ${SESSION_ID}
@@ -16,21 +17,23 @@ URL='http://www.google.co.jp/'
 
 goURL ${SESSION_ID} ${URL}
 
-waitByTitle ${SESSION_ID} "Google"
+waitByTitle ${SESSION_ID} Google
 
 #"OSC Fukuoka 太宰府"を検索
 
 SELECTOR='name'
 LOCATOR='q'
 
-ELEMENT_ID=$(findElementByName ${SESSION_ID} q)
+ELEMENT_ID=$(findElementByName ${SESSION_ID} ${LOCATOR})
 key='OSC Fukuoka 太宰府\n'
 
-sendKeysToElement ${SESSION_ID} ${ELEMENT_ID} "${key}"
+sendKeysToElement ${SESSION_ID} ${ELEMENT_ID} ${key}
 
 #検索結果が表示されるまで待つ
 TITLE_VALUE='OSC Fukuoka 太宰府 - Google 検索'
-waitByTitle "${SESSION_ID}" "${TITLE_VALUE}"
+waitByTitle ${SESSION_ID} ${TITLE_VALUE}
+
+echo ${TITLE_VALUE}
 
 #OSC2011 Fukuoka のレポートを表示させる 
 LOCATOR="太宰府にて開催！！"
@@ -64,4 +67,6 @@ sleep 10s;
 
 #ウインドウを閉じる
 deleteSession ${SESSION_ID}
+
+pkill chromedriver
 
