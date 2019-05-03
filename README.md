@@ -18,6 +18,12 @@
      次のURLから必要なファイルを取得します。   
     <http://www.seleniumhq.org/download/>   
     + Google Chrome Driver  
+    2. httpieのインストール
+    次のURLを参考にして下さい。   
+    <https://github.com/jakubroztocil/httpie>
+    3. jqのインストール
+    次のURLを参考にして下さい。   
+    <https://stedolan.github.io/jq/download/>
 3. bashスクリプトの起動  
    以上で準備完了です。bashスクリプトを起動しましょう。  
    `$ Emily.bash`  
@@ -34,3 +40,7 @@
       <https://www.slideshare.net/hirofumitouhei/bashwebselenium-webdriver>  
    5. OSC2011 Fukuoka 太宰府にて開催！！  
       <https://www.ospn.jp/press/20111219osc2011-fukuoka-report.html>  
+   6. HTTPie: a CLI, cURL-like tool for humans
+      <https://github.com/jakubroztocil/httpie>
+   7. jq is a lightweight and flexible command-line JSON processor.
+      <https://stedolan.github.io/jq/>
