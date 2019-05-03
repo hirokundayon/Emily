@@ -4,7 +4,7 @@ SCRIPT_DIR=$(cd $(dirname $0);pwd)
 . ${SCRIPT_DIR}/EmilySub.bash
 
 pkill chromedriver
-chromedriver
+chromedriver &
 
 #ウィンドウオープン
 SESSION_ID=$(newSession)
