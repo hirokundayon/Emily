@@ -5,11 +5,7 @@
 #
 function newSession() {
     local BROWSER=$1
-    local RESPONSE=""
-
-    RESPONSE=$(curl --request "POST" \
-		    --data '{"desiredCapabilities":{},"requiredCapabilities":{}}' \
-		    "http://localhost:9515/session")
+    local RESPONSE=$(echo '{"desiredCapabilities":{},"requiredCapabilities":{}}' | http POST localhost:9515/session)
 
     local SESSION_ID=$(echo ${RESPONSE} | jq -r .sessionId)
     echo ${SESSION_ID}
@@ -21,8 +17,7 @@ function newSession() {
 #
 function maximizeWindow() {
     local SESSION_ID=$1
-    RESPONSE=$(curl --request "POST" \
-		    "http://localhost:9515/session/"${SESSION_ID}"/window/maximize")
+    local RESPONSE=$(http POST localhost:9515/session/${SESSION_ID}/window/maximize)
 }
 
 
@@ -35,9 +30,7 @@ function goURL() {
     local SESSION_ID=$1
     local URL=$2
 
-    local RESPONSE=$(curl --request "POST" \
-			  --data '{"url":"'${URL}'"}' \
-			  "http://localhost:9515/session/"${SESSION_ID}"/url")
+    local RESPONSE=$(echo '{"url":"'${URL}'"}' | http POST localhost:9515/session/${SESSION_ID}/url)
 }
 
 # getTitle
@@ -45,8 +38,7 @@ function goURL() {
 #     $1 セッションID
 function getTitle() {
     local SESSION_ID=$1
-    local RESPONSE=$(curl --request "GET" \
-			  "http://localhost:9515/session/${SESSION_ID}/title")
+    local RESPONSE=$(http GET localhost:9515/session/${SESSION_ID}/title)
     local TITLE=$(echo ${RESPONSE} | jq -r .value)
     echo ${TITLE}
 }
@@ -59,6 +51,7 @@ function getTitle() {
 function waitByTitle() {
     local SESSION_ID=$1
     local VALUE=$2
+    local RESPONSE=""
 
     if [ $# -eq 1 ] ; then
         VALUE=""
@@ -71,8 +64,7 @@ function waitByTitle() {
 
     while [ "${TITLE}" != "${VALUE}" ];
     do
-	RESPONSE=$(curl --request "GET" \
-			"http://localhost:9515/session/${SESSION_ID}/title");
+        local RESPONSE=$(http GET localhost:9515/session/${SESSION_ID}/title)
 	TITLE=$(echo ${RESPONSE} | jq -r .value );
     done
 }
@@ -91,9 +83,7 @@ function findElementByName() {
 
     while [ "${STATE}" != 0 ]
     do
-        RESPONSE=$(curl --request "POST" \
-			  --data "{\"using\":\"${SELECTOR}\",\"value\":\"${LOCATOR}\"}" \
-			  "http://localhost:9515/session/${SESSION_ID}/element")
+        RESPONSE=$(echo "{\"using\":\"${SELECTOR}\",\"value\":\"${LOCATOR}\"}" | http POST localhost:9515/session/${SESSION_ID}/element)
         STATE=$(echo ${RESPONSE} | jq -r .status)
     done
 
@@ -117,9 +107,7 @@ function findElementByPartialLinkText() {
 
     while [ "${STATE}" != 0 ]
     do
-        RESPONSE=$(curl --request "POST" \
-			--data "{\"using\":\"${SELECTOR}\",\"value\":\"${LOCATOR}\"}" \
-			"http://localhost:9515/session/${SESSION_ID}/element")
+        RESPONSE=$(echo "{\"using\":\"${SELECTOR}\",\"value\":\"${LOCATOR}\"}" | http POST localhost:9515/session/${SESSION_ID}/element)
         STATE=$(echo ${RESPONSE} | jq -r .status)
     done
 
@@ -143,9 +131,7 @@ function findElementByLinkText() {
 
     while [ "${STATE}" != 0 ]
     do
-        RESPONSE=$(curl --request "POST" \
-			--data "{\"using\":\"${SELECTOR}\",\"value\":\"${LOCATOR}\"}" \
-			"http://localhost:9515/session/${SESSION_ID}/element")
+        RESPONSE=$(echo "{\"using\":\"${SELECTOR}\",\"value\":\"${LOCATOR}\"}" | http POST localhost:9515/session/${SESSION_ID}/element)
         STATE=$(echo ${RESPONSE} | jq -r .status)
     done
 
@@ -169,9 +155,7 @@ function findElementByCSSselector() {
 
     while [ "${STATE}" != 0 ]
     do
-        RESPONSE=$(curl --request "POST" \
-			--data "{\"using\":\"${SELECTOR}\",\"value\":\"${LOCATOR}\"}" \
-			"http://localhost:9515/session/${SESSION_ID}/element")
+        RESPONSE=$(echo "{\"using\":\"${SELECTOR}\",\"value\":\"${LOCATOR}\"}" | http POST localhost:9515/session/${SESSION_ID}/element)
         STATE=$(echo ${RESPONSE} | jq -r .status)
     done
 
@@ -189,8 +173,7 @@ function clickElement() {
     local SESSION_ID=$1
     local ELEMENT_ID=$2
 
-    local RESPONSE=$(curl --request "POST" \
-			  "http://localhost:9515/session/${SESSION_ID}/element/${ELEMENT_ID}/click")
+    local RESPONSE=$(http POST localhost:9515/session/${SESSION_ID}/element/${ELEMENT_ID}/click)
 }
 
 # sendKeysToElement
@@ -209,9 +192,7 @@ function sendKeysToElement() {
     elif [ $# -gt 3 ] ; then
         KEYDATA=$(echo $@ | sed -e "s/^${SESSION_ID} ${ELEMENT_ID} //")
     fi
-    local RESPONSE=$(curl --request "POST" \
-			  --data "{\"value\":[\"${KEYDATA}\"]}" \
-			  "http://localhost:9515/session/${SESSION_ID}/element/${ELEMENT_ID}/value")
+    local RESPONSE=$(echo "{\"value\":[\"${KEYDATA}\"]}" | http POST localhost:9515/session/${SESSION_ID}/element/${ELEMENT_ID}/value)
 }
 
 # executeScript
@@ -223,9 +204,7 @@ function executeScript() {
     local SESSION_ID=$1
     local SCRIPT=$2
 
-    local RESPONSE=$(curl --request "POST" \
-			  --data '{"script":"'${SCRIPT}'", "args":[]}' \
-			  "http://localhost:9515/session/${SESSION_ID}/execute/sync")
+    local RESPONSE=$(echo '{"script":"'${SCRIPT}'", "args":[]}' | http POST localhost:9515/session/${SESSION_ID}/execute/sync)
 }
 
 # deleteSession
@@ -235,6 +214,5 @@ function executeScript() {
 function deleteSession() {
     local SESSION_ID=$1
 
-    local RESPONSE=$(curl --request "DELETE" \
-			  "http://localhost:9515/session/${SESSION_ID}")
+    local RESPONSE=$(http DELETE localhost:9515/session/${SESSION_ID})
 }
