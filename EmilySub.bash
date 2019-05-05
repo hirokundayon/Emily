@@ -195,6 +195,38 @@ function sendKeysToElement() {
     local RESPONSE=$(echo "{\"value\":[\"${KEYDATA}\"]}" | http POST localhost:9515/session/${SESSION_ID}/element/${ELEMENT_ID}/value)
 }
 
+#switchToParentFrame
+#   親のフレームへ移動します。
+#     $1 セッションID
+#
+function switchToParentFrame() {
+    local SESSION_ID=$1
+    local RESPONSE=$(http POST localhost:9515/session/${SESSION_ID}/frame/parent)
+}
+
+# switchToFrame
+#   指定されたフレームへ遷移します。
+#     $1 セッションID
+#     $2 ELEMENT ID
+#
+function switchToFrame() {
+    local SESSION_ID=$1
+    local ELEMENT_ID=$2
+
+    local RESPONSE=""
+    local STATE=""
+    
+    #一度クリックしておく
+    RESPONSE=$(http POST localhost:9515/session/${SESSION_ID}/element/${ELEMENT_ID}/click)
+    
+    while [ "${STATE}" != 0 ]
+    do
+        RESPONSE=$(echo "{\"id\":{\"ELEMENT\":\"${ELEMENT_ID}\"}}" | \
+                                 http POST localhost:9515/session/${SESSION_ID}/frame)
+        STATE=$(echo ${RESPONSE} | jq -r .status)
+    done
+}
+
 # executeScript
 #   指定されたJavascriptを実行させます。
 #     $1 セッションID
